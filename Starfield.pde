@@ -4,7 +4,7 @@ void setup()
 {
 	size(500, 500);
 	
-	particle = new Particle[200];
+	particle = new Particle[300];
 	for(int i = 0; i < particle.length ; i++)
 	{
 		particle[i] = new NormalParticle();
@@ -34,6 +34,7 @@ class NormalParticle implements Particle
 	int myColor;
 	double myAngle;
 	double mySpeed;
+	int mySize;
 
   NormalParticle()
   {
@@ -42,19 +43,24 @@ class NormalParticle implements Particle
     yPos = 250;
     myAngle = (Math.random()*3)*Math.PI;
     mySpeed = (Math.random()*5);
-  	
+  	mySize = 10;
   }
 
   	public void move()
   	{
   		xPos = xPos+ Math.cos(myAngle)* mySpeed;
   		yPos = yPos+ Math.sin(myAngle)* mySpeed;
-  		
+  		mySize += 1;
+  		if(mySize > 20)
+  		{
+  			mySize = 10;
+  		}
+
   	}
   	public void show()
   	{
         fill(myColor);
-        ellipse((float)xPos, (float)yPos, 10,10);
+        ellipse((float)xPos, (float)yPos, mySize,mySize);
   	}
 
 
@@ -78,7 +84,7 @@ class OddballParticle implements Particle //uses an interface
 
 	OddballParticle()
   {
-  	myColor = color((int)(Math.random()*255), (int)(Math.random()*255), (int)(Math.random()*255));
+  	myColor = color(255,255,255,150);
     xPos = 250;
     yPos = 250;
     myAngle = (Math.random()*3)*Math.PI;
@@ -94,8 +100,10 @@ class OddballParticle implements Particle //uses an interface
   	}
   	public void show()
   	{
+
         fill(myColor);
         ellipse((float)xPos, (float)yPos, 20,20);
+
   	}
 
 
@@ -109,7 +117,7 @@ class JumboParticle extends  NormalParticle //uses inheritance
     public void show()
     {
     	fill(myColor);
-    	ellipse((float)xPos, (float)yPos, 50,50);
+    	ellipse((float)xPos, (float)yPos, 60,60);
     }
 
 
